@@ -37,7 +37,7 @@ public class SimulacaoCreditoService {
     private final UsuarioRepositorio usuarioRepositorio;
     private final SimulacaoCreditoValidador validador;
     private final TipoCalculoJurosSistemaLocator calculoLocator;
-    
+    public static final String SIMULACOES_CACHE = "simulacoesCache";
 
     @Cacheable(
         value = "simulacoesCache",
