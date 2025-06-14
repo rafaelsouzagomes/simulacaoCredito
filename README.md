@@ -10,19 +10,20 @@ Projeto Spring Boot para simulação e gerenciamento de propostas de crédito, c
 
 - Java 17+
 - Maven 3.8+
-- PostgreSQL (ou H2 para testes)
+- PostgreSQL
+- H2 para testes)
 - (Opcional) Docker para rodar banco local
 
 ### Configuração do Banco
 
 1. Crie o banco de dados:
    ```sql
-   CREATE DATABASE simulador_credito;
+   CREATE DATABASE simulacaocreditodb;
    ```
 
 2. Configure o usuário e senha no arquivo `src/main/resources/application.properties`:
    ```
-   spring.datasource.url=jdbc:postgresql://localhost:5432/simulador_credito
+   spring.datasource.url=jdbc:postgresql://localhost:5432/simulacaocreditodb
    spring.datasource.username=postgres
    spring.datasource.password=postgres
    ```
