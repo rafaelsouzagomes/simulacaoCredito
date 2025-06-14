@@ -5,6 +5,7 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.interview.simuladorCredito.dtos.CalculoParamsDTO;
@@ -20,9 +21,16 @@ public class CalculoPagamentoComJuros implements TipoCalculoJurosSistema {
 	
 	//half up
 	private static final MathContext MC = MathContext.DECIMAL128;
+
 	
+	@Cacheable(
+	        value = "simulacoesCache",
+	        key = "T(java.util.Objects).hash(#dto.valorSolicitado, #dto.prazoMeses, #faixa.taxaAnual )"
+	 )
 	@Override
 	public ResultadoCalculoPagamentoComJuros efetuarCalculos(CalculoParamsDTO dto, TaxaPorFaixaEtariaConfiguracao faixa) {
+		
+		System.out.println(" - Executando EfetuarCalculos ");
 		
 		validador.validarTaxa(faixa.getTaxaAnual());
 		

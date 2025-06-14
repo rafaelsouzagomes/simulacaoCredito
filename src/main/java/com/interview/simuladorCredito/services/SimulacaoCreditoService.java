@@ -41,10 +41,12 @@ public class SimulacaoCreditoService {
 
     @Cacheable(
         value = "simulacoesCache",
-        key = "T(java.util.Objects).hash(#dto.valorSolicitado, #dto.prazoMeses, #taxaAnual, #dto.tipoCalculo)"
+        key = "T(java.util.Objects).hash(#dto.valorSolicitado, #dto.prazoMeses, #taxaAnual, #dto.tipoCalculo, #dto.dataNascimento)"
     )
     @Transactional
     public SimulacaoCreditoResponseDto realizarSimulacao(@Valid SimulacaoCreditoRequestDto dto) {
+    	
+    	System.out.println(" - Executando Simulação  ");
         int idade = Period.between(dto.dataNascimento(), LocalDate.now()).getYears();
         TaxaPorFaixaEtariaConfiguracao faixa = taxaRepositorio.findByFaixaEtaria(idade);
         validador.validarConfiguracaoFaixaEtariaExistente(idade, faixa);
@@ -54,6 +56,9 @@ public class SimulacaoCreditoService {
 
         ResultadoCalculoPagamentoComJuros resultado = calculoStrategy.efetuarCalculos(calculosParams, faixa);
 
+        System.out.println(" - Execução Finalizada  ");
+        System.out.println("");
+        
         return new SimulacaoCreditoResponseDto(
             resultado.valorTotal(), resultado.parcelaMensal(), resultado.totalJuros()
         );
