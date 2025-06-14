@@ -1,0 +1,9 @@
+-- Primeiro remove os dados incorretos
+DELETE FROM taxa_por_faixa_etaria_configuracao;
+
+-- Depois insere os dados corretos
+INSERT INTO taxa_por_faixa_etaria_configuracao (idade_minima, idade_maxima, taxa_anual) VALUES
+  (18, 25, 0.050),
+  (26, 40, 0.030),
+  (41, 60, 0.020),
+  (61, 120, 0.040); 
