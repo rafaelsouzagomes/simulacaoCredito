@@ -164,8 +164,3 @@ Para rodar os testes:
 mvn test
 ```
 
----
-
-## 📄 Licença
-
-MIT
